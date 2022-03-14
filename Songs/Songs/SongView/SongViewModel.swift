@@ -8,8 +8,11 @@
 import Foundation
 
 class SongViewModel {
-    var songs = [SongModel]()
     let songService: SongServiceType
+    weak var controller: SongViewController?
+
+    var songs = [SongModel]()
+
     init(service: SongServiceType) {
         songService = service
         setupSongs()
@@ -20,6 +23,9 @@ extension SongViewModel {
     func setupSongs() {
         songService.fetchSongs { [weak self] songModel in
             self?.songs = songModel
+            DispatchQueue.main.async {
+                self?.controller?.reloadView()
+            }
         }
     }
 }

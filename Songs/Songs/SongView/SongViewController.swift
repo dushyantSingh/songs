@@ -13,7 +13,22 @@ class SongViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViewModel()
         setupTableView()
+        setupUI()
+    }
+
+    func reloadView() {
+        tableView.reloadData()
+    }
+}
+
+private extension SongViewController {
+    func setupViewModel() {
+        viewModel.controller = self
+    }
+
+    func setupUI() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Songs"
     }
