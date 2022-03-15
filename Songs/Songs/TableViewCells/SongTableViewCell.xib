@@ -36,11 +36,20 @@
                                     <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
                                 </buttonConfiguration>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="7O2-Rr-AOL">
+                                <rect key="frame" x="337" y="55" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="yOH-R7-FzW"/>
+                                    <constraint firstAttribute="width" constant="45" id="zaF-ZP-bPv"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                         <constraints>
                             <constraint firstItem="D0q-Z4-sTv" firstAttribute="top" secondItem="D64-TW-7U9" secondAttribute="top" constant="12" id="7Dm-PE-zle"/>
+                            <constraint firstAttribute="trailing" secondItem="7O2-Rr-AOL" secondAttribute="trailing" constant="8" id="KDl-7u-hDG"/>
                             <constraint firstAttribute="trailing" secondItem="2HT-Zr-jDE" secondAttribute="trailing" constant="8" id="N5B-Tl-TTp"/>
+                            <constraint firstAttribute="bottom" secondItem="7O2-Rr-AOL" secondAttribute="bottom" id="Thq-qK-40c"/>
                             <constraint firstItem="D0q-Z4-sTv" firstAttribute="leading" secondItem="D64-TW-7U9" secondAttribute="leading" constant="12" id="XM3-l7-liL"/>
                             <constraint firstAttribute="bottom" secondItem="2HT-Zr-jDE" secondAttribute="bottom" id="dib-gb-rae"/>
                         </constraints>
@@ -55,6 +64,8 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundContentView" destination="D64-TW-7U9" id="AyQ-Me-yQ5"/>
+                <outlet property="loadingView" destination="7O2-Rr-AOL" id="TFV-HH-Dnr"/>
+                <outlet property="songStatusButton" destination="2HT-Zr-jDE" id="CzM-cP-u4O"/>
                 <outlet property="songTitleLabel" destination="D0q-Z4-sTv" id="PVv-HM-Jrz"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="140.625"/>

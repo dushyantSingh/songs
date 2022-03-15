@@ -10,13 +10,19 @@ import UIKit
 
 class SongTableViewCell: UITableViewCell {
     @IBOutlet weak var songTitleLabel: UILabel!
+    @IBOutlet weak var songStatusButton: UIButton!
     @IBOutlet weak var backgroundContentView: UIView!
+    @IBOutlet weak var loadingView: UIActivityIndicatorView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
     }
 
-    func configure(songTitle: String) {
+    var onButtonClick: (() -> Void)?
+    func configure(songTitle: String, status: SongStatus, onClick: (() -> Void)?) {
+        onButtonClick = onClick
+        updateSongStatus(status)
         songTitleLabel.text = songTitle
     }
 }
@@ -32,6 +38,33 @@ private extension SongTableViewCell {
         backgroundContentView.layer.rasterizationScale = UIScreen.main.scale
 
         songTitleLabel.font = Theme.Font.thinFont(with: 18)
+        songStatusButton.addTarget(self,
+                                   action: #selector(songsButtonClicked),
+                                   for: .touchUpInside)
+    }
+
+    @objc
+    func songsButtonClicked() {
+        if let onButtonClick = onButtonClick {
+            onButtonClick()
+        }
+    }
+
+    func updateSongStatus(_ status: SongStatus) {
+        songStatusButton.isHidden = false
+        loadingView.stopAnimating()
+        loadingView.isHidden = true
+
+        switch status {
+        case .availableToDownload: break
+        case .downloading:
+            songStatusButton.isHidden = true
+            loadingView.startAnimating()
+            loadingView.isHidden = false
+        case .downloaded: break
+        case .playing: break
+        case .paused: break
+        }
     }
 }
 
