@@ -61,7 +61,10 @@ extension SongViewController: UITableViewDataSource {
         return cell
     }
 
-    func configure(cell: SongTableViewCell, song: SongModel) {
-        cell.configure(songTitle: song.name)
+    func configure(cell: SongTableViewCell, song: Song) {
+        cell.configure(songTitle: song.name, status: song.songStatus,
+                       onClick: { [weak self] in
+            self?.viewModel.songButtonClicked(song)
+        })
     }
 }

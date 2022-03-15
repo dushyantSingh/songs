@@ -11,20 +11,32 @@ class SongViewModel {
     let songService: SongServiceType
     weak var controller: SongViewController?
 
-    var songs = [SongModel]()
+    var songs = [Song]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.controller?.reloadView()
+            }
+        }
+    }
 
     init(service: SongServiceType) {
         songService = service
         setupSongs()
+    }
+
+    func songButtonClicked(_ song: Song) {
+        print(song)
     }
 }
 
 extension SongViewModel {
     func setupSongs() {
         songService.fetchSongs { [weak self] songModel in
-            self?.songs = songModel
-            DispatchQueue.main.async {
-                self?.controller?.reloadView()
+            self?.songs = songModel.map { model in
+                Song(id: model.id,
+                     name: model.name,
+                     audioURL: model.audioURL,
+                     songStatus: SongStatus.availableToDownload)
             }
         }
     }
