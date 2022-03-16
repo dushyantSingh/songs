@@ -56,14 +56,22 @@ private extension SongTableViewCell {
         loadingView.isHidden = true
 
         switch status {
-        case .availableToDownload: break
+        case .availableToDownload:
+            songStatusButton.setImage(UIImage(systemName: "icloud.and.arrow.down"),
+                                      for: .normal)
         case .downloading:
             songStatusButton.isHidden = true
             loadingView.startAnimating()
             loadingView.isHidden = false
-        case .downloaded: break
-        case .playing: break
-        case .paused: break
+        case .downloaded:
+            songStatusButton.setImage(UIImage(systemName: "play.circle"),
+                                      for: .normal)
+        case .playing:
+            songStatusButton.setImage(UIImage(systemName: "pause.circle"),
+                                      for: .normal)
+        case .paused:
+            songStatusButton.setImage(UIImage(systemName: "play.circle"),
+                                      for: .normal)
         }
     }
 }
