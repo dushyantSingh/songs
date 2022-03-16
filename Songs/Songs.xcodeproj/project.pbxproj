@@ -26,6 +26,7 @@
 		10B20D2827DEE6F900630277 /* SongsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10B20D2727DEE6F900630277 /* SongsUITestsLaunchTests.swift */; };
 		10C475EC27E044C40058F749 /* SongStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C475EB27E044C40058F749 /* SongStatus.swift */; };
 		10C475EE27E046090058F749 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C475ED27E046090058F749 /* Song.swift */; };
+		10C475F127E1BCF80058F749 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C475F027E1BCF80058F749 /* CircularProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		10B20D2727DEE6F900630277 /* SongsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		10C475EB27E044C40058F749 /* SongStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongStatus.swift; sourceTree = "<group>"; };
 		10C475ED27E046090058F749 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		10C475F027E1BCF80058F749 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				107C87B427DF10E4006BC9BA /* SongManager */,
 				107C87B127DF0114006BC9BA /* Constants */,
 				10B20D0D27DEE6F900630277 /* Assets.xcassets */,
+				10C475EF27E1BCE10058F749 /* CircularProgressView */,
 				10B20D0F27DEE6F900630277 /* LaunchScreen.storyboard */,
 				10B20D1227DEE6F900630277 /* Info.plist */,
 			);
@@ -227,6 +230,14 @@
 				10C475ED27E046090058F749 /* Song.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		10C475EF27E1BCE10058F749 /* CircularProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				10C475F027E1BCF80058F749 /* CircularProgressView.swift */,
+			);
+			path = CircularProgressView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +383,7 @@
 				10B20D0527DEE6F500630277 /* AppDelegate.swift in Sources */,
 				10B20D0727DEE6F500630277 /* SceneDelegate.swift in Sources */,
 				10C475EE27E046090058F749 /* Song.swift in Sources */,
+				10C475F127E1BCF80058F749 /* CircularProgressView.swift in Sources */,
 				107C87AC27DEF789006BC9BA /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
