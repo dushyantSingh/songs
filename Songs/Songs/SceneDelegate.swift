@@ -15,7 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let initialViewController = UIViewController.make(viewController: SongViewController.self)
 
         let service = SongService()
-        initialViewController.viewModel = SongViewModel(service: service)
+        let songDownloader = SongManager()
+        initialViewController.viewModel = SongViewModel(service: service,
+                                                        songDownloader: songDownloader)
         let navController = UINavigationController(rootViewController: initialViewController)
         self.window?.rootViewController = navController
         self.window?.makeKeyAndVisible()
