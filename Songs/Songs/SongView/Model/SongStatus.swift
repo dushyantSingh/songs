@@ -14,4 +14,3 @@ enum SongStatus {
     case playing
     case paused
 }
-

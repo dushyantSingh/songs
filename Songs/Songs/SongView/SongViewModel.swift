@@ -108,10 +108,8 @@ private extension SongViewModel {
 
 private extension SongViewModel {
     func playSong(_ song: Song) {
-        if let currentSong = currentPlayingSong, currentSong.id != song.id {
-            songManager.stop(currentSong.id)
-            updateSongStatus(song: currentSong, status: .downloaded)
-        }
+        stopIfAnySongIsPlaying(song)
+
         if songManager.play(song.id) {
             updateSongStatus(song: song, status: .playing)
             currentPlayingSong = song
@@ -123,6 +121,14 @@ private extension SongViewModel {
     func pauseSong(_ song: Song) {
         if songManager.pause(song.id) {
             updateSongStatus(song: song, status: .paused)
+        }
+    }
+
+    func stopIfAnySongIsPlaying(_ song: Song) {
+        if let currentSong = currentPlayingSong,
+           currentSong.id != song.id {
+            songManager.stop(currentSong.id)
+            updateSongStatus(song: currentSong, status: .downloaded)
         }
     }
 }
