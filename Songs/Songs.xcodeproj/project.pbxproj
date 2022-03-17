@@ -153,6 +153,7 @@
 		107C87AE27DF002E006BC9BA /* SongService */ = {
 			isa = PBXGroup;
 			children = (
+				107C87A227DEECCD006BC9BA /* Model */,
 				107C87AF27DF003D006BC9BA /* SongService.swift */,
 			);
 			path = SongService;
@@ -200,7 +201,6 @@
 				10B20D0427DEE6F500630277 /* AppDelegate.swift */,
 				10B20D0627DEE6F500630277 /* SceneDelegate.swift */,
 				107C87AA27DEF768006BC9BA /* Theme */,
-				107C87A227DEECCD006BC9BA /* Model */,
 				107C879D27DEE7D8006BC9BA /* SongView */,
 				107C87A527DEF67E006BC9BA /* TableViewCells */,
 				107C87AD27DF0026006BC9BA /* Services */,
