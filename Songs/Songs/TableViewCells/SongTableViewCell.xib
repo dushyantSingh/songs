@@ -17,19 +17,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D64-TW-7U9">
-                        <rect key="frame" x="12" y="4" width="390" height="100"/>
+                        <rect key="frame" x="16" y="8" width="382" height="92"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0q-Z4-sTv">
-                                <rect key="frame" x="12" y="12" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0q-Z4-sTv">
+                                <rect key="frame" x="12" y="12" width="340" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="systemBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HT-Zr-jDE">
-                                <rect key="frame" x="337" y="55" width="45" height="45"/>
+                                <rect key="frame" x="324" y="42" width="50" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="trD-8U-TWx"/>
-                                    <constraint firstAttribute="height" constant="45" id="vBA-i3-t1Z"/>
+                                    <constraint firstAttribute="width" constant="50" id="trD-8U-TWx"/>
+                                    <constraint firstAttribute="height" constant="50" id="vBA-i3-t1Z"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise.icloud" catalog="system">
@@ -37,7 +37,7 @@
                                 </buttonConfiguration>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehp-qM-Nk8" customClass="CircularProgressView" customModule="Songs" customModuleProvider="target">
-                                <rect key="frame" x="337" y="55" width="45" height="45"/>
+                                <rect key="frame" x="329" y="47" width="45" height="45"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="E1e-6X-034"/>
@@ -45,22 +45,24 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGrayColor"/>
+                        <color key="backgroundColor" red="0.396078431372549" green="0.11764705882352941" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="D0q-Z4-sTv" firstAttribute="top" secondItem="D64-TW-7U9" secondAttribute="top" constant="12" id="7Dm-PE-zle"/>
+                            <constraint firstAttribute="trailing" secondItem="D0q-Z4-sTv" secondAttribute="trailing" constant="30" id="9IQ-p6-fL1"/>
                             <constraint firstAttribute="trailing" secondItem="2HT-Zr-jDE" secondAttribute="trailing" constant="8" id="N5B-Tl-TTp"/>
                             <constraint firstAttribute="bottom" secondItem="ehp-qM-Nk8" secondAttribute="bottom" id="X4u-Mc-6lQ"/>
                             <constraint firstItem="D0q-Z4-sTv" firstAttribute="leading" secondItem="D64-TW-7U9" secondAttribute="leading" constant="12" id="XM3-l7-liL"/>
                             <constraint firstAttribute="bottom" secondItem="2HT-Zr-jDE" secondAttribute="bottom" id="dib-gb-rae"/>
                             <constraint firstAttribute="trailing" secondItem="ehp-qM-Nk8" secondAttribute="trailing" constant="8" id="lNN-B0-qde"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="D0q-Z4-sTv" secondAttribute="bottom" constant="12" id="p1h-GV-m1s"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="D64-TW-7U9" firstAttribute="leading" secondItem="3HA-qO-iK5" secondAttribute="leading" constant="12" id="7i4-5K-fPA"/>
-                    <constraint firstItem="D64-TW-7U9" firstAttribute="top" secondItem="3HA-qO-iK5" secondAttribute="top" constant="4" id="8tX-vs-ZbJ"/>
-                    <constraint firstAttribute="trailing" secondItem="D64-TW-7U9" secondAttribute="trailing" constant="12" id="QR7-Q0-Y4F"/>
-                    <constraint firstAttribute="bottom" secondItem="D64-TW-7U9" secondAttribute="bottom" constant="4" id="nRk-dc-Li8"/>
+                    <constraint firstItem="D64-TW-7U9" firstAttribute="leading" secondItem="3HA-qO-iK5" secondAttribute="leading" constant="16" id="7i4-5K-fPA"/>
+                    <constraint firstItem="D64-TW-7U9" firstAttribute="top" secondItem="3HA-qO-iK5" secondAttribute="top" constant="8" id="8tX-vs-ZbJ"/>
+                    <constraint firstAttribute="trailing" secondItem="D64-TW-7U9" secondAttribute="trailing" constant="16" id="QR7-Q0-Y4F"/>
+                    <constraint firstAttribute="bottom" secondItem="D64-TW-7U9" secondAttribute="bottom" constant="8" id="nRk-dc-Li8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -69,16 +71,13 @@
                 <outlet property="songStatusButton" destination="2HT-Zr-jDE" id="CzM-cP-u4O"/>
                 <outlet property="songTitleLabel" destination="D0q-Z4-sTv" id="PVv-HM-Jrz"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="140.625"/>
+            <point key="canvasLocation" x="-619" y="67"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="arrow.clockwise.icloud" catalog="system" width="128" height="88"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

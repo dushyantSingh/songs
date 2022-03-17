@@ -29,7 +29,7 @@ class SongTableViewCell: UITableViewCell {
 
 private extension SongTableViewCell {
     func setupUI() {
-        backgroundContentView.layer.cornerRadius = 5.0
+        backgroundContentView.layer.cornerRadius = 8.0
         backgroundContentView.layer.shadowColor = UIColor.black.cgColor
         backgroundContentView.layer.shadowOpacity = 0.2
         backgroundContentView.layer.shadowRadius = 3
