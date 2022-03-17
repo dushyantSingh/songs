@@ -30,21 +30,24 @@ class SongViewModel {
     }
 
     func songButtonClicked(_ song: Song) {
-        if song.songStatus == .availableToDownload {
-            updateSongStatus(song: song, status: .downloading)
+        if case .availableToDownload = song.songStatus {
+            updateSongStatus(song: song, status: .downloading(progress: 0.0))
             songDownloader.downloadSong(id: song.id,
-                                        urlString: song.audioURL) { progress in
-                print("Song \(song.id) progress: \(progress)")
+                                        urlString: song.audioURL) { [weak self] progress in
+                self?.updateSongStatus(song: song,
+                                 status: .downloading(progress: progress))
             } completionHandler: { [weak self] succeeded, error in
                 if succeeded {
-                    self?.updateSongStatus(song: song, status: .downloaded)
+                    self?.updateSongStatus(song: song,
+                                           status: .downloaded)
                 } else {
                     if let title = error?.localizedDescription {
                         self?.songDownloadFailed(title)
                     } else {
                         self?.songDownloadFailed("Unable to download song. Please try again")
                     }
-                    self?.updateSongStatus(song: song, status: .availableToDownload)
+                    self?.updateSongStatus(song: song,
+                                           status: .availableToDownload)
                 }
             }
         }
