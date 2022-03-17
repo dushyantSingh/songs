@@ -7,7 +7,6 @@
 
 import UIKit
 class CircularProgressView: UIView {
-    // First create two layer properties
     private var backgroundLayer = CAShapeLayer()
     private var progressLayer = CAShapeLayer()
 
