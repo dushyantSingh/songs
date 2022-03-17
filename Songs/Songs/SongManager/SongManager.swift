@@ -137,7 +137,6 @@ extension SongManager: URLSessionDelegate, URLSessionDownloadDelegate {
         tasks.removeValue(forKey: task)
     }
 
-
     func urlSession(_ session: URLSession,
                     downloadTask: URLSessionDownloadTask,
                     didWriteData bytesWritten: Int64,

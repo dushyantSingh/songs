@@ -30,7 +30,6 @@ class SongService: SongServiceType {
                 return
             }
             completionHandler(songResponse.data)
-
         }
         .resume()
     }
