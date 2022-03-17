@@ -6,12 +6,21 @@
 //
 
 import Foundation
+import AVFoundation
+
 protocol SongManagerType {
     func isDownloaded(_ songId: String) -> Bool
-    func downloadSong(id: String,
+    func deleteSongFromCache(_ songId: String)
+    func downloadSong(songId: String,
                       urlString: String,
                       progress: @escaping (Float) -> Void,
                       completionHandler: @escaping (Bool, Error?) -> Void)
+
+    @discardableResult
+    func play(_ songId: String) -> Bool
+    @discardableResult
+    func pause(_ songId: String) -> Bool
+    func stop(_ songId: String)
 }
 
 class SongManager: NSObject, SongManagerType {
@@ -23,6 +32,7 @@ class SongManager: NSObject, SongManagerType {
 
     private var session: URLSession!
     private var tasks = [URLSessionTask: SongCallBack]()
+    private var player: AVAudioPlayer?
 
     override init() {
         super.init()
@@ -36,7 +46,7 @@ class SongManager: NSObject, SongManagerType {
         return FileManager.default.fileExists(atPath: path)
     }
 
-    func downloadSong(id: String,
+    func downloadSong(songId: String,
                       urlString: String,
                       progress: @escaping (Float) -> Void,
                       completionHandler: @escaping (Bool, Error?) -> Void) {
@@ -45,19 +55,57 @@ class SongManager: NSObject, SongManagerType {
             return
         }
 
-        if isDownloaded(id) {
+        if isDownloaded(songId) {
             completionHandler(true, nil)
             return
         }
 
         let task = session.downloadTask(with: remoteURL)
-        let songCallBack = SongCallBack(id: id,
+        let songCallBack = SongCallBack(id: songId,
                                         progress: progress,
                                         completion: completionHandler)
         tasks[task] = songCallBack
         task.resume()
     }
-    var somes: NSKeyValueObservation!
+
+    func deleteSongFromCache(_ songId: String) {
+        let songPath = getSongPath(songId)
+        _ = try? FileManager.default.removeItem(at: songPath)
+    }
+
+    @discardableResult
+    func play(_ songId: String) -> Bool {
+        if player != nil {
+            player?.play()
+            return true
+        }
+
+        do {
+            let songPath = getSongPath(songId)
+            player = try AVAudioPlayer(contentsOf: songPath)
+            player?.prepareToPlay()
+            player?.play()
+            return true
+        } catch {
+            print(error)
+            player = nil
+            return false
+        }
+    }
+
+    @discardableResult
+    func pause(_ songId: String) -> Bool {
+        guard let player = player else {
+            return false
+        }
+        player.pause()
+        return true
+    }
+
+    func stop(_ songId: String) {
+        player?.stop()
+        player = nil
+    }
 }
 
 
