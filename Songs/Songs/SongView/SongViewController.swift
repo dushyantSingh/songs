@@ -21,6 +21,10 @@ class SongViewController: UIViewController {
     func reloadView() {
         tableView.reloadData()
     }
+
+    func showErrorAlert(_ alert: UIAlertController) {
+        present(alert, animated: true)
+    }
 }
 
 private extension SongViewController {

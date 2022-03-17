@@ -11,8 +11,10 @@ import UIKit
 class SongViewModel {
 
     let songService: SongServiceType
-    let songDownloader: SongManagerType
+    let songManager: SongManagerType
     weak var controller: SongViewController?
+
+    private var currentPlayingSong: Song?
 
     var songs = [Song]() {
         didSet {
@@ -25,31 +27,19 @@ class SongViewModel {
     init(service: SongServiceType,
          songDownloader: SongManagerType) {
         self.songService = service
-        self.songDownloader = songDownloader
+        self.songManager = songDownloader
         setupSongs()
     }
 
     func songButtonClicked(_ song: Song) {
-        if case .availableToDownload = song.songStatus {
-            updateSongStatus(song: song, status: .downloading(progress: 0.0))
-            songDownloader.downloadSong(id: song.id,
-                                        urlString: song.audioURL) { [weak self] progress in
-                self?.updateSongStatus(song: song,
-                                 status: .downloading(progress: progress))
-            } completionHandler: { [weak self] succeeded, error in
-                if succeeded {
-                    self?.updateSongStatus(song: song,
-                                           status: .downloaded)
-                } else {
-                    if let title = error?.localizedDescription {
-                        self?.songDownloadFailed(title)
-                    } else {
-                        self?.songDownloadFailed("Unable to download song. Please try again")
-                    }
-                    self?.updateSongStatus(song: song,
-                                           status: .availableToDownload)
-                }
-            }
+        switch song.songStatus {
+        case .availableToDownload:
+            downloadSong(song)
+        case .downloading: break
+        case .downloaded, .paused:
+                playSong(song)
+        case .playing:
+            pauseSong(song)
         }
     }
 }
@@ -62,7 +52,7 @@ private extension SongViewModel {
                 Song(id: model.id,
                      name: model.name,
                      audioURL: model.audioURL,
-                     songStatus: self.songDownloader.isDownloaded(model.id)
+                     songStatus: self.songManager.isDownloaded(model.id)
                      ? SongStatus.downloaded
                      : SongStatus.availableToDownload)
             }
@@ -79,6 +69,30 @@ private extension SongViewModel {
             break
         }
     }
+}
+
+private extension SongViewModel {
+    func downloadSong(_ song: Song) {
+        updateSongStatus(song: song, status: .downloading(progress: 0.0))
+        songManager.downloadSong(songId: song.id,
+                                 urlString: song.audioURL) { [weak self] progress in
+            self?.updateSongStatus(song: song,
+                                   status: .downloading(progress: progress))
+        } completionHandler: { [weak self] succeeded, error in
+            if succeeded {
+                self?.updateSongStatus(song: song,
+                                       status: .downloaded)
+            } else {
+                if let title = error?.localizedDescription {
+                    self?.songDownloadFailed(title)
+                } else {
+                    self?.songDownloadFailed("Unable to download song. Please try again")
+                }
+                self?.updateSongStatus(song: song,
+                                       status: .availableToDownload)
+            }
+        }
+    }
 
     func songDownloadFailed(_ title: String) {
         let alert = UIAlertController(title: title,
@@ -89,5 +103,41 @@ private extension SongViewModel {
         DispatchQueue.main.async {
             self.controller?.present(alert, animated: true)
         }
+    }
+}
+
+private extension SongViewModel {
+    func playSong(_ song: Song) {
+        if let currentSong = currentPlayingSong, currentSong.id != song.id {
+            songManager.stop(currentSong.id)
+            updateSongStatus(song: currentSong, status: .downloaded)
+        }
+        if songManager.play(song.id) {
+            updateSongStatus(song: song, status: .playing)
+            currentPlayingSong = song
+        } else {
+            showSongPlayError(song)
+        }
+    }
+
+    func pauseSong(_ song: Song) {
+        if songManager.pause(song.id) {
+            updateSongStatus(song: song, status: .paused)
+        }
+    }
+}
+
+private extension SongViewModel {
+    func showSongPlayError(_ song: Song) {
+        let alert = UIAlertController(title: "Unable to play \(song.name)",
+                          message: "Please try again",
+                          preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Redownload",
+                                      style: .default, handler: { [weak self]_ in
+            self?.songManager.deleteSongFromCache(song.id)
+            self?.downloadSong(song)
+        }))
+        controller?.showErrorAlert(alert)
     }
 }
