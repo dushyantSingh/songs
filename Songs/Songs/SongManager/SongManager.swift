@@ -21,17 +21,14 @@ class SongManager: NSObject, SongManagerType {
         let completion: (Bool, Error?) -> Void
     }
 
-    private var downloadOperationQueue: OperationQueue!
     private var session: URLSession!
     private var tasks = [URLSessionTask: SongCallBack]()
 
     override init() {
         super.init()
-        downloadOperationQueue = OperationQueue()
-        downloadOperationQueue.maxConcurrentOperationCount = 1
         session = URLSession(configuration: URLSessionConfiguration.default,
                              delegate: self,
-                             delegateQueue: downloadOperationQueue)
+                             delegateQueue: nil)
     }
 
     func isDownloaded(_ songId: String) -> Bool {
@@ -68,8 +65,8 @@ extension SongManager: URLSessionDelegate, URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession,
                     downloadTask: URLSessionDownloadTask,
                     didFinishDownloadingTo location: URL) {
-        guard let callBack = tasks[downloadTask] else { return }
-
+        guard let callBack = tasks[downloadTask]
+        else { return }
         let targetURL = self.getSongPath(callBack.id)
         do {
             try FileManager.default.createDirectory(atPath: targetURL.path,
@@ -81,6 +78,7 @@ extension SongManager: URLSessionDelegate, URLSessionDownloadDelegate {
         catch {
             callBack.completion(false, error)
         }
+        tasks.removeValue(forKey: downloadTask)
     }
 
     func urlSession(_ session: URLSession,
@@ -88,6 +86,7 @@ extension SongManager: URLSessionDelegate, URLSessionDownloadDelegate {
                     didCompleteWithError error: Error?) {
         guard let callBack = tasks[task], let error = error else { return }
         callBack.completion(false, error)
+        tasks.removeValue(forKey: task)
     }
 
 
@@ -97,20 +96,18 @@ extension SongManager: URLSessionDelegate, URLSessionDownloadDelegate {
                     totalBytesWritten: Int64,
                     totalBytesExpectedToWrite: Int64) {
         let percentDownloaded = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
-        DispatchQueue.main.async {
-            if let callBack = self.tasks[downloadTask] {
-                callBack.progress(percentDownloaded)
-            }
+        if let callBack = self.tasks[downloadTask] {
+            callBack.progress(percentDownloaded)
         }
     }
 }
 
 private extension SongManager {
     func getSongPath(_ songId: String) -> URL {
-        guard let tempDir = FileManager.default.urls(for: .cachesDirectory,
-                                                        in: .userDomainMask).first else {
-            fatalError("Unable to get file path")
-        }
+        guard let tempDir = FileManager.default
+                .urls(for: .cachesDirectory, in: .userDomainMask).first else {
+                    fatalError("Unable to get file path")
+                }
         return tempDir.appendingPathComponent("Songs").appendingPathComponent("Song_\(songId).mp3")
     }
 }
