@@ -27,6 +27,10 @@
 		10C475EC27E044C40058F749 /* SongStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C475EB27E044C40058F749 /* SongStatus.swift */; };
 		10C475EE27E046090058F749 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C475ED27E046090058F749 /* Song.swift */; };
 		10C475F127E1BCF80058F749 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C475F027E1BCF80058F749 /* CircularProgressView.swift */; };
+		10C475F327E388540058F749 /* SongViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C475F227E388540058F749 /* SongViewControllerTests.swift */; };
+		10C475F527E38B470058F749 /* SongFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C475F427E38B470058F749 /* SongFactory.swift */; };
+		10C475F727E38BEA0058F749 /* SongServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C475F627E38BEA0058F749 /* SongServiceMock.swift */; };
+		10C475F927E38BF80058F749 /* SongManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C475F827E38BF80058F749 /* SongManagerMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,10 @@
 		10C475EB27E044C40058F749 /* SongStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongStatus.swift; sourceTree = "<group>"; };
 		10C475ED27E046090058F749 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		10C475F027E1BCF80058F749 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		10C475F227E388540058F749 /* SongViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongViewControllerTests.swift; sourceTree = "<group>"; };
+		10C475F427E38B470058F749 /* SongFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongFactory.swift; sourceTree = "<group>"; };
+		10C475F627E38BEA0058F749 /* SongServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongServiceMock.swift; sourceTree = "<group>"; };
+		10C475F827E38BF80058F749 /* SongManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongManagerMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +218,10 @@
 			isa = PBXGroup;
 			children = (
 				10B20D1B27DEE6F900630277 /* SongsTests.swift */,
+				10C475F227E388540058F749 /* SongViewControllerTests.swift */,
+				10C475F427E38B470058F749 /* SongFactory.swift */,
+				10C475F627E38BEA0058F749 /* SongServiceMock.swift */,
+				10C475F827E38BF80058F749 /* SongManagerMock.swift */,
 			);
 			path = SongsTests;
 			sourceTree = "<group>";
@@ -393,6 +405,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				10B20D1C27DEE6F900630277 /* SongsTests.swift in Sources */,
+				10C475F527E38B470058F749 /* SongFactory.swift in Sources */,
+				10C475F727E38BEA0058F749 /* SongServiceMock.swift in Sources */,
+				10C475F927E38BF80058F749 /* SongManagerMock.swift in Sources */,
+				10C475F327E388540058F749 /* SongViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
