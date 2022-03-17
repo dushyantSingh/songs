@@ -12,8 +12,8 @@ class SongTableViewCell: UITableViewCell {
     @IBOutlet weak var songTitleLabel: UILabel!
     @IBOutlet weak var songStatusButton: UIButton!
     @IBOutlet weak var backgroundContentView: UIView!
-    @IBOutlet weak var loadingView: UIActivityIndicatorView!
-    
+    @IBOutlet weak var progressView: CircularProgressView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setupUI()
@@ -52,17 +52,15 @@ private extension SongTableViewCell {
 
     func updateSongStatus(_ status: SongStatus) {
         songStatusButton.isHidden = false
-        loadingView.stopAnimating()
-        loadingView.isHidden = true
-
+        progressView.isHidden = true
         switch status {
         case .availableToDownload:
             songStatusButton.setImage(UIImage(systemName: "icloud.and.arrow.down"),
                                       for: .normal)
-        case .downloading:
+        case .downloading(let progress):
             songStatusButton.isHidden = true
-            loadingView.startAnimating()
-            loadingView.isHidden = false
+            progressView.isHidden = false
+            progressView.setProgress(progress)
         case .downloaded:
             songStatusButton.setImage(UIImage(systemName: "play.circle"),
                                       for: .normal)

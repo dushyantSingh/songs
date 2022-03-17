@@ -36,22 +36,23 @@
                                     <color key="baseForegroundColor" systemColor="systemBackgroundColor"/>
                                 </buttonConfiguration>
                             </button>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="7O2-Rr-AOL">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ehp-qM-Nk8" customClass="CircularProgressView" customModule="Songs" customModuleProvider="target">
                                 <rect key="frame" x="337" y="55" width="45" height="45"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="yOH-R7-FzW"/>
-                                    <constraint firstAttribute="width" constant="45" id="zaF-ZP-bPv"/>
+                                    <constraint firstAttribute="width" constant="45" id="E1e-6X-034"/>
+                                    <constraint firstAttribute="height" constant="45" id="h80-CR-BbA"/>
                                 </constraints>
-                            </activityIndicatorView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGrayColor"/>
                         <constraints>
                             <constraint firstItem="D0q-Z4-sTv" firstAttribute="top" secondItem="D64-TW-7U9" secondAttribute="top" constant="12" id="7Dm-PE-zle"/>
-                            <constraint firstAttribute="trailing" secondItem="7O2-Rr-AOL" secondAttribute="trailing" constant="8" id="KDl-7u-hDG"/>
                             <constraint firstAttribute="trailing" secondItem="2HT-Zr-jDE" secondAttribute="trailing" constant="8" id="N5B-Tl-TTp"/>
-                            <constraint firstAttribute="bottom" secondItem="7O2-Rr-AOL" secondAttribute="bottom" id="Thq-qK-40c"/>
+                            <constraint firstAttribute="bottom" secondItem="ehp-qM-Nk8" secondAttribute="bottom" id="X4u-Mc-6lQ"/>
                             <constraint firstItem="D0q-Z4-sTv" firstAttribute="leading" secondItem="D64-TW-7U9" secondAttribute="leading" constant="12" id="XM3-l7-liL"/>
                             <constraint firstAttribute="bottom" secondItem="2HT-Zr-jDE" secondAttribute="bottom" id="dib-gb-rae"/>
+                            <constraint firstAttribute="trailing" secondItem="ehp-qM-Nk8" secondAttribute="trailing" constant="8" id="lNN-B0-qde"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -64,7 +65,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundContentView" destination="D64-TW-7U9" id="AyQ-Me-yQ5"/>
-                <outlet property="loadingView" destination="7O2-Rr-AOL" id="TFV-HH-Dnr"/>
+                <outlet property="progressView" destination="ehp-qM-Nk8" id="yis-IC-JgT"/>
                 <outlet property="songStatusButton" destination="2HT-Zr-jDE" id="CzM-cP-u4O"/>
                 <outlet property="songTitleLabel" destination="D0q-Z4-sTv" id="PVv-HM-Jrz"/>
             </connections>
