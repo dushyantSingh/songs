@@ -9,8 +9,9 @@ import Foundation
 
 enum SongStatus {
     case availableToDownload
-    case downloading
+    case downloading(progress: Float)
     case downloaded
     case playing
     case paused
 }
+
